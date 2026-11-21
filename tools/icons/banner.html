@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../game/inter.css">
+<style>html, body { margin: 0; width: 100vw; height: 100vh; overflow: hidden; background: #0b1120; } svg { display: block; width: 100vw; height: 100vh; }</style>
+</head><body>
+<script src="art.js"></script>
+<script>
+    var stars = '';
+    [[330, 40, 1.6], [420, 26, 1.2], [520, 52, 1.8], [606, 30, 1.3], [585, 330, 1.4], [372, 330, 1.1], [40, 30, 1.4], [70, 320, 1.2]].forEach(function (s) { stars += '<circle cx="' + s[0] + '" cy="' + s[1] + '" r="' + s[2] + '" fill="#c7d2fe" opacity="0.6"/>'; });
+    var svg = '<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">' + DEFS +
+        '<rect width="640" height="360" fill="url(#bg)"/>' + stars +
+        emblem(150, 176, 112) + coins(226, 318, 30) +
+        '<text x="296" y="148" textLength="316" lengthAdjust="spacingAndGlyphs" font-family="Inter" font-weight="900" font-size="64" fill="#ffffff">PROZESSE</text>' +
+        '<text x="298" y="190" font-family="Inter" font-weight="800" font-size="24" letter-spacing="10" fill="#a5b4cc">ODER</text>' +
+        '<text x="294" y="282" textLength="318" lengthAdjust="spacingAndGlyphs" font-family="Inter" font-weight="900" font-size="98" fill="url(#pleite)">PLEITE</text>' +
+        '</svg>';
+    document.body.insertAdjacentHTML('beforeend', svg);
+</script>
+</body></html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../game/inter.css">
+<style>html, body { margin: 0; width: 100vw; height: 100vh; overflow: hidden; background: transparent; } svg { display: block; width: 100vw; height: 100vh; }</style>
+</head><body>
+<script src="art.js"></script>
+<script>
+    var svg = '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">' + DEFS +
+        '<rect x="8" y="8" width="496" height="496" rx="112" fill="url(#bg)" stroke="#8b5cf6" stroke-width="10"/>' +
+        emblem(244, 240, 178) + coins(392, 420, 52) +
+        '</svg>';
+    document.body.insertAdjacentHTML('beforeend', svg);
+</script>
+</body></html>

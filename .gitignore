@@ -1,0 +1,15 @@
+# Build-Ausgaben (die APK gibt es als Release-Download)
+build/
+*.apk
+*.idsig
+
+# Signatur-Schlüssel nie einchecken
+*.keystore
+*.jks
+
+# Alte Version 1 (Original-HTML mit Fremdbezügen + Web-Port)
+web/
+build_web.py
+prozesse_oder_pleite_der_8_figure_agency_simulator.html
+
+.DS_Store
