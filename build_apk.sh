@@ -9,7 +9,7 @@ export PATH="$JAVA_HOME/bin:/opt/homebrew/opt/node@22/bin:$PATH"
 SDK=/opt/homebrew/share/android-commandlinetools
 BT=$SDK/build-tools/34.0.0
 JAR=$SDK/platforms/android-34/android.jar
-FIRETV=${FIRETV:-192.168.30.171:5555}
+FIRETV=${FIRETV:-}   # z. B. FIRETV=192.168.1.50:5555, leer = einziges per adb verbundenes Gerät
 OUT=build
 APK=ProzesseOderPleite-FireTV.apk
 
@@ -43,7 +43,8 @@ fi
 ls -la "$APK"
 
 if [ "${1:-}" = "--install" ]; then
-    adb connect "$FIRETV" >/dev/null || true
-    adb -s "$FIRETV" install -r "$APK"
-    adb -s "$FIRETV" shell am start -n de.prozesseoderpleite.tv/.MainActivity
+    DEV=()
+    if [ -n "$FIRETV" ]; then adb connect "$FIRETV" >/dev/null || true; DEV=(-s "$FIRETV"); fi
+    adb ${DEV[@]+"${DEV[@]}"} install -r "$APK"
+    adb ${DEV[@]+"${DEV[@]}"} shell am start -n de.prozesseoderpleite.tv/.MainActivity
 fi
