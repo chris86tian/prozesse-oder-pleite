@@ -14,7 +14,7 @@
         twist: 'Kleine Beträge, echte Lektionen: Jeder Einkauf kostet erst Geld, bevor er Geld bringt.',
         startCash: 1200, fix: 120, setup: 0, mrr: 170, duration: null, varPct: 0.4,
         cap: 5, staffCap: 4, churn: 0.07, hitLeads: 2, salesCloses: 2, salaryMult: 1,
-        unit: 'Stammkäuferin', units: 'Stammkäufer', payWord: 'pro Monat',
+        unit: 'Stammkunde', units: 'Stammkunden', payWord: 'pro Monat',
         acq: 'Inserate einstellen', acqDesc: 'Fotos machen, Preis festlegen, online stellen! Stoppe den Zeiger im grünen Feld – jeder Treffer bringt zwei Interessenten.',
         care: 'Bewertungen beantworten',
         stars: [15000, 28000, 41000],
@@ -28,6 +28,12 @@
         roles: { sales: 'Social-Media-Helferin', delivery: 'Pack-Helfer', assist: 'Buchhaltungs-Hilfe' }
     };
     D.caseOrder = ['reselling', 'agentur', 'handwerk', 'roesterei', 'software'];
+
+    D.version = '3.2';
+    D.links = {
+        repo: 'https://github.com/chris86tian/prozesse-oder-pleite',
+        mobileApk: 'https://github.com/chris86tian/prozesse-oder-pleite/releases/latest/download/ProzesseOderPleite-Mobile.apk'
+    };
 
     D.events.push(
         {

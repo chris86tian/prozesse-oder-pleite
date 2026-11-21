@@ -16,7 +16,7 @@
     --cyan: #22d3ee;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 1280px; height: 720px; overflow: hidden; background: var(--bg); }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #05080f; }
 body {
     font-family: 'Inter', system-ui, sans-serif;
     color: var(--text);
@@ -25,7 +25,7 @@ body {
     -webkit-font-smoothing: antialiased;
     user-select: none;
 }
-#stage { position: relative; width: 1280px; height: 720px; overflow: hidden;
+#stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; width: 1280px; height: 720px; overflow: hidden;
     background: radial-gradient(1200px 600px at 80% -10%, #1e2a55 0%, transparent 60%), radial-gradient(900px 500px at -10% 110%, #1a1440 0%, transparent 60%), var(--bg); }
 #app { position: absolute; inset: 0; }
 .screen { position: absolute; inset: 0; padding: 28px 40px; display: flex; flex-direction: column; animation: fadeIn .22s ease-out; }
@@ -97,7 +97,7 @@ h3 { font-size: 26px; font-weight: 800; line-height: 1.2; }
 .title-bg { position: absolute; inset: 0; overflow: hidden; }
 .title-bg .coin { position: absolute; width: 64px; height: 64px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fde68a, #f59e0b 60%, #b45309); opacity: 0.18; animation: floaty 7s ease-in-out infinite; }
 @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-30px) rotate(20deg); } }
-.logo-big { font-size: 96px; font-weight: 900; letter-spacing: -3px; line-height: 0.92; }
+.logo-big { font-size: 84px; font-weight: 900; letter-spacing: -3px; line-height: 0.92; }
 .logo-big .oder { display: block; font-size: 40px; letter-spacing: 6px; color: var(--mute); margin: 10px 0 6px; }
 .logo-big .p1 { color: #fff; }
 .logo-big .p2 { background: linear-gradient(90deg, #f87171, #facc15); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -284,3 +284,16 @@ h3 { font-size: 26px; font-weight: 800; line-height: 1.2; }
 .skillicon { font-size: 40px; line-height: 1; width: 64px; height: 64px; display: grid; place-items: center; background: #0b1220; border-radius: 18px; border: 2px solid var(--line); flex: none; }
 .modal .card .skillicon { width: 84px; height: 84px; font-size: 52px; }
 .modal .answers .btn { font-size: 21px; }
+
+/* ---------- Touch (Handy) ---------- */
+body.touch [data-f].f { outline: none !important; box-shadow: none !important; transform: none; }
+body.touch .keys { display: none; }
+body.touch .btn:active { transform: scale(0.97); filter: brightness(1.15); }
+
+/* ---------- Info & QR ---------- */
+.qrbox { background: #fff; border-radius: 22px; padding: 14px; width: 260px; height: 260px; flex: none; }
+.qrbox svg { width: 100%; height: 100%; display: block; }
+.steps { display: flex; flex-direction: column; gap: 10px; }
+.steps .st { display: flex; gap: 12px; align-items: flex-start; font-size: 20px; font-weight: 600; line-height: 1.3; }
+.steps .st i { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 900; font-size: 18px; }
+.url { font-size: 15px; color: var(--mute); word-break: break-all; font-weight: 700; }

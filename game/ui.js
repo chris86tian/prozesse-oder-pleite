@@ -116,6 +116,17 @@
         }
     }
 
+    /* ================= Bildgröße: 1280 × 720 auf jeden Bildschirm einpassen ================= */
+    function fit() {
+        var st = document.getElementById('stage');
+        var w = window.innerWidth, h = window.innerHeight;
+        var sc = Math.min(w / 1280, h / 720);
+        st.style.transform = 'translate(' + Math.round((w - 1280 * sc) / 2) + 'px,' + Math.round((h - 720 * sc) / 2) + 'px) scale(' + sc + ')';
+    }
+    window.addEventListener('resize', fit);
+    fit();
+    document.addEventListener('touchstart', function () { document.body.classList.add('touch'); }, { once: true, passive: true });
+
     /* ================= Rendering & Navigation ================= */
     function show(html, opts) {
         clearTimers();
@@ -324,7 +335,7 @@
         for (var i = 0; i < 9; i++) coinsBg += '<div class="coin" style="left:' + (8 + i * 11) + '%;top:' + (10 + (i * 37) % 70) + '%;animation-delay:' + (i * 0.7) + 's"></div>';
         var html = '<div class="title-bg">' + coinsBg + '</div><div class="shade-left"></div>' +
             '<div class="row grow" style="align-items:center;gap:50px;position:relative">' +
-            '<div class="col" style="width:560px;gap:26px">' +
+            '<div class="col" style="width:560px;gap:18px">' +
             '<div class="logo-big"><span class="p1">PROZESSE</span><span class="oder">ODER</span><span class="p2">PLEITE</span></div>' +
             '<div class="big mute" style="font-weight:600;font-size:25px">Baue in 12 Monaten ein Unternehmen auf, das auch ohne dich läuft.</div>' +
             '<div class="col" style="gap:14px;width:420px">' +
@@ -333,6 +344,7 @@
             btn('2 Spieler – Duell <span class="chip p" style="margin-left:auto">NEU</span>', 'newgame2', null, { style: 'width:100%' }) +
             '<div class="row" style="gap:14px">' + btn('So geht\'s', 'help', null, { style: 'flex:1;justify-content:center;white-space:nowrap;padding:14px 16px' }) +
             btn('Lernmodus <span class="chip ' + (learnMode ? 'g' : '') + '" style="margin-left:6px">' + (learnMode ? 'AN' : 'AUS') + '</span>', 'toggleLearn', null, { style: 'flex:1.3;justify-content:center;white-space:nowrap;padding:14px 16px' }) + '</div>' +
+            btn('📱 Aufs Handy holen <span class="chip" style="margin-left:auto">QR-Code</span>', 'info', null, { style: 'width:100%;white-space:nowrap' }) +
             '</div></div>' +
             '<div class="grow col" style="gap:18px;justify-content:flex-end;align-self:stretch;padding-bottom:34px">' +
             (PP3D.ok ? '' : '<div class="card" style="padding:0;overflow:hidden;height:360px">' + A.building(3, '#8b5cf6') + '</div>') +
@@ -355,6 +367,33 @@
     };
     H.help = function () { help(ctx.from || 'title'); };
     H.title = function () { title(); };
+
+    /* ================= Info: Handy-Version per QR-Code ================= */
+    function qrSvg(text) {
+        if (!window.qrcode) return '<div class="center" style="display:flex;height:100%;color:#0f172a;font-weight:800">QR nicht verfügbar</div>';
+        var q = window.qrcode(0, 'M'); q.addData(text); q.make();
+        return q.createSvgTag({ cellSize: 6, margin: 1, scalable: true });
+    }
+    H.info = function () { info(); };
+    function info() {
+        var L = D.links;
+        var html = header('Aufs Handy holen', 'Spiel es auch unterwegs – als App für Android-Smartphones.') +
+            '<div class="row grow" style="gap:26px;min-height:0">' +
+            '<div class="card row" style="gap:26px;flex:1.45;align-items:center">' +
+            '<div class="qrbox">' + qrSvg(L.mobileApk) + '</div>' +
+            '<div class="col" style="gap:14px"><h3>📱 Handy-Version (Android)</h3><div class="steps">' +
+            '<div class="st"><i>1</i><span>QR-Code mit der Handy-Kamera scannen</span></div>' +
+            '<div class="st"><i>2</i><span>Die Datei <b>ProzesseOderPleite-Mobile.apk</b> herunterladen</span></div>' +
+            '<div class="st"><i>3</i><span>Öffnen und „Installation aus dieser Quelle erlauben“ bestätigen</span></div>' +
+            '<div class="st"><i>4</i><span>Installieren – Handy quer halten und loslegen</span></div>' +
+            '</div><div class="url">' + esc(L.mobileApk) + '</div></div></div>' +
+            '<div class="card col" style="gap:14px;flex:1;align-items:center;text-align:center">' +
+            '<div class="qrbox" style="width:200px;height:200px">' + qrSvg(L.repo) + '</div>' +
+            '<h3>💻 Open Source auf GitHub</h3><div class="mute">Code, Anleitung, Updates und die Fire-TV-Version zum Nachbauen.</div><div class="url">' + esc(L.repo) + '</div></div>' +
+            '</div>' +
+            '<div class="row" style="justify-content:space-between;align-items:center;margin-top:16px"><span class="mute">Version ' + esc(D.version) + ' · Der Spielstand auf dem Handy ist getrennt vom Fernseher.</span>' + btn('Zurück', 'title', null, { cls: 'primary', auto: true }) + '</div>';
+        show(html, { back: title });
+    }
 
     /* ================= Hilfe ================= */
     function help(from) {
